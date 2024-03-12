@@ -1,44 +1,42 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Rugby {
     public static void main(String[] args) {
-        ArrayList<Integer> team1 = new ArrayList<>();
-        ArrayList<Integer> team2 = new ArrayList<>();
+        int[] team1 = new int[25];
+        int[] team2 = new int[25];
 
         Random random = new Random();
 
         for (int i = 0; i < 25; i++) {
-            int age;
-            do {
-                age = random.nextInt(40 - 18 + 1) + 18;
-            } while (age % 10 == 4 || age % 10 == 9);
-
-            if (i < 12) {
-                team1.add(age);
-            } else {
-                team2.add(age);
-            }
+            team1[i] = generateRandomAge(random);
+            team2[i] = generateRandomAge(random);
         }
 
         System.out.println("Team 1 ages:");
-        for (int age : team1) {
-            System.out.print(age + " ");
-        }
-        System.out.println("\nAverage age of team 1: " + averageAge(team1));
+        printAges(team1);
+        System.out.println("Average age of team 1: " + averageAge(team1));
 
         System.out.println("\nTeam 2 ages:");
-        for (int age : team2) {
-            System.out.print(age + " ");
-        }
-        System.out.println("\nAverage age of team 2: " + averageAge(team2));
+        printAges(team2);
+        System.out.println("Average age of team 2: " + averageAge(team2));
     }
 
-    public static double averageAge(ArrayList<Integer> ages) {
+    public static int generateRandomAge(Random random) {
+        return random.nextInt(23) + 18; // генерация возраста от 18 до 40 лет
+    }
+
+    public static double averageAge(int[] ages) {
         double sum = 0;
         for (int age : ages) {
             sum += age;
         }
-        return sum / ages.size();
+        return sum / ages.length;
+    }
+
+    public static void printAges(int[] ages) {
+        for (int age : ages) {
+            System.out.print(age + " ");
+        }
+        System.out.println();
     }
 }
